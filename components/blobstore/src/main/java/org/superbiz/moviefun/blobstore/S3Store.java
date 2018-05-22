@@ -39,10 +39,11 @@ public class S3Store implements BlobStore {
 
         byte[] bytes = IOUtils.toByteArray(content);
 
+
         return Optional.of(new Blob(
-            name,
-            new ByteArrayInputStream(bytes),
-            tika.detect(bytes)
+                name,
+                new ByteArrayInputStream(bytes),
+                tika.detect(bytes)
         ));
     }
 }
