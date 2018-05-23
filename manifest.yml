@@ -7,14 +7,25 @@ applications:
   services:
   - album-database
   - moviefun-s3
+  - movie-fun-sso
+  - movie-fun-registry
+  env:
+    GRANT_TYPE: client_credentials
 - name: movie-service
   path: applications/movie-service/build/libs/movie-service-1.1.0-SNAPSHOT.jar
   services:
   - movies-database
+  - movie-fun-sso
+  - movie-fun-registry
+  env:
+   GRANT_TYPE: client_credentials
 - name: movie-fun-app
   path: applications/movie-fun-app/build/libs/movie-fun-app-1.1.0-SNAPSHOT.war
   services:
   - moviefun-s3
+  - movie-fun-sso
+  - movie-fun-registry
+  - movie-fun-config
+  - movie-fun-circuit-breaker
   env:
-    ALBUMS_URL: https://album-service.apps.evans.pal.pivotal.io/albums
-    MOVIES_URL: https://movie-service.apps.evans.pal.pivotal.io/movies
+    GRANT_TYPE: "authorization code"
